@@ -25,3 +25,15 @@ def get_url(short_url):
             detail="Invalid short url",
         )
     return {"short_url": short_url, "url": url}
+
+
+def delete_url(short_url):
+    redis_client = redis.Redis()
+    url = redis_client.get(short_url)
+    if url is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Invalid short url",
+        )
+    redis_client.delete(short_url)
+    return {"short_url": short_url, "url": url}

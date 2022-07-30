@@ -22,3 +22,9 @@ async def create_url(url: str):
 async def get_url(short_url: str):
     """Get full url by short url"""
     return utils.get_url(short_url)
+
+
+@router.put("/{short_url}", response_model=schemas.Url)
+async def delete_url(short_url: str):
+    """Delete short url from database"""
+    return utils.delete_url(short_url)
