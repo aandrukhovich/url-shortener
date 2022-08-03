@@ -3,6 +3,15 @@
 Simple URL shortener. FastAPI, Uvicorn, Redis, Docker.
 
 # Run
-`uvicorn src.app.main:app`
+```bash
+cd src
+uvicorn app.main:app
+# for on-the-fly update server after source code editing.
+uvicorn app.main:app --reload
+```
 
-`uvicorn src.app.main:app --reload` for on-the-fly update server after source code editing.
+# Test
+```bash
+# from any directory
+pytest
+```
