@@ -15,9 +15,9 @@ def test_ping_pong():
 
 
 def generate_random_url() -> str:
-    allowed_symbols = string.ascii_letters + string.digits + "."
+    allowed_symbols = string.ascii_letters
     url_len = random.randint(4, 20)
-    return "".join(random.choices(allowed_symbols, k=url_len))
+    return "".join(random.choices(allowed_symbols, k=url_len)) + ".com"
 
 
 def check_short_url_rules(short_url: str) -> bool:
