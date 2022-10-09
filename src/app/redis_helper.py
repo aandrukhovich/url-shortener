@@ -39,7 +39,7 @@ class RedisClient(metaclass=Singleton):
         return self._conn
 
     def getConnection(self):
-        self._conn = redis.Redis(connection_pool=self.pool)
+        self._conn = redis.Redis(connection_pool=self.pool, decode_responses=True, charset="utf-8")
 
     @property
     def startup(self):

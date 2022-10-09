@@ -1,5 +1,6 @@
 import random
 import string
+from urllib.parse import urlparse
 
 from fastapi import HTTPException, status
 
@@ -17,7 +18,7 @@ def create_url(url):
     return {"short_url": short_url, "url": url}
 
 
-def get_url(short_url):
+def get_url(short_url) -> str:
     redis_conn = RedisClient().conn
     url = redis_conn.get(short_url)
     if url is None:
@@ -25,7 +26,14 @@ def get_url(short_url):
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Invalid short url",
         )
-    return {"short_url": short_url, "url": url}
+    return url.decode("utf-8")
+
+
+def transform_url_to_redirectable(raw_url: str):
+    parsed_url = urlparse(raw_url)
+    if not parsed_url.scheme:
+        parsed_url = parsed_url._replace(scheme="https")
+    return parsed_url.geturl()
 
 
 def delete_url(short_url):

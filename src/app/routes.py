@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import RedirectResponse
 
 import app.schemas as schemas
 import app.utils as utils
@@ -21,7 +22,7 @@ async def create_url(url: str):
 @router.get("/{short_url}", response_model=schemas.Url)
 async def get_url(short_url: str):
     """Get full url by short url"""
-    return utils.get_url(short_url)
+    return RedirectResponse(utils.transform_url_to_redirectable(utils.get_url(short_url)))
 
 
 @router.put("/{short_url}", response_model=schemas.Url)
