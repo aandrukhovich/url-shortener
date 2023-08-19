@@ -1,7 +1,6 @@
 # url-shortener
 
-Simple URL shortener. FastAPI, Uvicorn, Redis, Docker.
-
+Simple URL shortener.
 # Run
 ```bash
 cd src
